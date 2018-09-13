@@ -58,6 +58,12 @@ class AdminStatusDetailPresenter : AdminStatusDetailContract.Presenter {
 
                             userEmaiFromOrder = order.customerEmail
 
+                            var field = order.fieldId
+
+                            var orderTime = order.startHour + " - " + order.endHour
+
+                            var orderDate = order.date
+
                             userRoot.addListenerForSingleValueEvent(object : ValueEventListener {
 
                                 override fun onCancelled(p0: DatabaseError?) {
@@ -69,6 +75,7 @@ class AdminStatusDetailPresenter : AdminStatusDetailContract.Presenter {
                                     for (userSnapshot in userData!!.children) {
 
                                         val userEmail = userSnapshot.child("email").getValue<String>(String::class.java)
+                                        val userField = userSnapshot.child("field").getValue<String>(String::class.java)
 
                                         if (userEmail.equals(userEmaiFromOrder)) {
 
@@ -86,6 +93,13 @@ class AdminStatusDetailPresenter : AdminStatusDetailContract.Presenter {
                                                 }
                                             }
                                             sendNotificationToUser(userId, 0)
+                                        }
+
+                                        if (field.equals(userField)) {
+                                            val userId = userSnapshot.key
+                                            sendNotificationToKeeper(userId, "Lapangan telah " +
+                                                    "dibooking pada tanggal " + orderDate + ", pukul " +
+                                                    orderTime)
                                         }
                                     }
                                 }
@@ -183,6 +197,15 @@ class AdminStatusDetailPresenter : AdminStatusDetailContract.Presenter {
             0 -> message = "Pembayaran sukses"
             1 -> message = "Pembayaran gagal"
         }
+
+        val notification = User.Notification(FirebaseAuth.getInstance().currentUser!!.uid, message)
+
+        Database.addNotification(userId, notification)
+    }
+
+    override fun sendNotificationToKeeper(userId: String, message: String) {
+
+        val usersReference: DatabaseReference = Database.database.getReference("users")
 
         val notification = User.Notification(FirebaseAuth.getInstance().currentUser!!.uid, message)
 
