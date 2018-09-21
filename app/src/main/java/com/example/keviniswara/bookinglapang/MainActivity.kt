@@ -18,6 +18,9 @@ import android.support.design.internal.BottomNavigationMenuView
 import android.support.v7.widget.Toolbar
 import android.view.View
 import com.example.keviniswara.bookinglapang.utils.BottomNavigationViewHelper
+import android.content.DialogInterface
+import android.support.v7.app.AlertDialog
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -61,6 +64,28 @@ class MainActivity : AppCompatActivity() {
         mToolbar = mBinding.toolbar
 
         setSupportActionBar(mToolbar)
+
+        mBinding.ivHelp.setOnClickListener {
+            val alertDialogBuilder = AlertDialog.Builder(this)
+            alertDialogBuilder.setTitle("Bantuan")
+            alertDialogBuilder.setMessage("1. Isi data lapangan yang ingin di cari (Nama lapangan, Jenis Olahraga, Tanggal main, Jam main dan jam Selesai)\n" +
+                    "\n" +
+                    "2. Tunggu notifikasi pemesanan pada halaman Status Pemesanan. \n" +
+                    "- Jika status \" Belum Verifikasi \", penjaga lapangan belum menjawab pesanan\n" +
+                    "- Jika status \" lapangan tersedia \", lapangan yg dipesan tersedia dan user diharapkan segera melakukan pembayaran\n" +
+                    "- Jika status \" tidak tersedia \",  lapangan yg dipesan tidak tersedia, silahkan mengajukan pesanan lain\n" +
+                    "\n" +
+                    "3.  Jika lapangan tersedia, tekan pesanan pada Status Pemesanan hingga muncul detail pesanan, kemudian tekan tombol bayar. Pilih ingin melakukan pembayaran transfer ke bank apa, dan lakukan transfer ke no rekening bank yang tertera sesuai dengan biaya serta KODE UNIK-nya (3 angka paling belakang)\n" +
+                    "\n" +
+                    "4. Tunggu konfirmasi dari lapangan pada menu Status Pemesanan. Apabila sudah dikonfirmasi untuk pemesanan dan pembayaran, KorbanBooking hanya tinggal datang ke lapangan pada waktu dan tempat yang telah dipesan. Selamat bermain :)")
+
+            alertDialogBuilder.setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
+
+            })
+
+            val alertDialog = alertDialogBuilder.create()
+            alertDialog.show()
+        }
 
         val navigation = findViewById<BottomNavigationView>(R.id.bottom_nav_bar)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)

@@ -15,15 +15,32 @@
             android:background="@color/colorPrimary"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Dark">
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:background="@android:color/transparent"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
-                android:scaleType="fitStart"
-                android:src="@drawable/toolbar" />
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:background="@android:color/transparent"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/toolbar" />
+
+                <ImageView
+                    android:id="@+id/iv_help"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="12dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:src="@drawable/ic_status"
+                    android:layout_marginEnd="12dp" />
+
+            </android.support.constraint.ConstraintLayout>
         </android.support.v7.widget.Toolbar>
 
         <RelativeLayout

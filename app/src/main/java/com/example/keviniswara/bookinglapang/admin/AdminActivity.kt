@@ -63,6 +63,8 @@ class AdminActivity: AppCompatActivity() {
 
         setSupportActionBar(mToolbar)
 
+        mBinding.ivHelp.visibility = View.INVISIBLE
+
         val navigation = findViewById<BottomNavigationView>(R.id.bottom_nav_bar)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         val navHelper = BottomNavigationViewHelper()
